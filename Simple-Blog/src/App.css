@@ -1,0 +1,296 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f4f6f9;
+}
+
+.navbar {
+  background: #0077ff;
+  color: white;
+  padding: 18px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.navbar li {
+  cursor: pointer;
+}
+
+.navbar li:hover {
+  color: yellow;
+}
+
+.hero {
+  background: linear-gradient(135deg, #0077ff, #00b4ff);
+  color: white;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.hero h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 18px;
+}
+
+.blog-form {
+  width: 80%;
+  max-width: 700px;
+  margin: 30px auto;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.blog-form h2 {
+  margin-bottom: 20px;
+}
+
+.blog-form input,
+.blog-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.blog-form textarea {
+  height: 140px;
+  resize: none;
+}
+
+.blog-form button {
+  width: 100%;
+  background: #0077ff;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.blog-form button:hover {
+  background: #005ecc;
+}
+
+.container {
+  width: 90%;
+  margin: 40px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.blog-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.card h2 {
+  padding: 15px;
+}
+
+.card p {
+  padding: 0 15px 15px;
+  color: #555;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+}
+
+.read-btn {
+  background: #0077ff;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.delete-btn {
+  background: red;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.read-btn:hover {
+  background: #005ecc;
+}
+
+.delete-btn:hover {
+  background: darkred;
+}
+
+.footer {
+  background: #0077ff;
+  color: white;
+  text-align: center;
+  padding: 18px;
+  margin-top: 40px;
+}
+
+.edit-btn {
+  background: orange;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  background: darkorange;
+}
+
+.view-btn {
+  background: #28a745;
+  color: white;
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  display: inline-block;
+  transition: 0.3s;
+}
+
+.view-btn:hover {
+  background: #218838;
+}
+
+.details-container {
+  width: 80%;
+  max-width: 900px;
+  margin: 40px auto;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.details-image {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.details-container h1 {
+  margin-bottom: 20px;
+}
+
+.details-content {
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.back-btn {
+  display: inline-block;
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: #0077ff;
+  font-weight: bold;
+}
+
+.blog-count {
+  width: 80%;
+  max-width: 700px;
+  margin: 20px auto;
+  background: #0077ff;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.page{
+    width:80%;
+    margin:50px auto;
+    background:white;
+    padding:40px;
+    border-radius:10px;
+    box-shadow:0 5px 10px rgba(0,0,0,.2);
+}
+
+.page h1{
+    margin-bottom:20px;
+}
+
+.page p{
+    font-size:18px;
+    line-height:1.8;
+}
+
+.navbar a{
+    color:white;
+    text-decoration:none;
+}
+
+.navbar a:hover{
+    color:yellow;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .navbar ul {
+    margin-top: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero h1 {
+    font-size: 30px;
+  }
+
+  .blog-form {
+    width: 95%;
+  }
+
+  .container {
+    width: 95%;
+  }
+}
