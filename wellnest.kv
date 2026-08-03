@@ -1,0 +1,586 @@
+<Screen>:
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<Label>:
+    color: 0.1, 0.2, 0.4, 1
+
+<Button>:
+    background_normal: ''
+    background_color: 0.35, 0.65, 0.98, 1
+    color: 1, 1, 1, 1
+    font_size: 16
+    size_hint_y: None
+    height: 50
+    border: 16, 16, 16, 16
+
+<TextInput>:
+    background_color: 1, 1, 1, 1
+    foreground_color: 0.05, 0.15, 0.35, 1
+    cursor_color: 0.1, 0.3, 0.8, 1
+    padding: [10, 12]
+
+<Spinner>:
+    background_color: 1, 1, 1, 1
+    color: 0.05, 0.15, 0.35, 1
+
+#:kivy 2.0
+
+<HomeScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 10
+        Label:
+            id: welcome_label
+            text: "Welcome, " + app.current_user + "!"
+            font_size: 28
+            bold: True
+            size_hint_y: None
+            height: 60
+        Label:
+            id: reminder_label
+            text: ''
+            font_size: 16
+            color: 0.2, 0.6, 1, 1
+            size_hint_y: None
+            height: 50
+        Label:
+            text: 'Disclaimer: This app is for wellness tracking only and is not a substitute for professional medical advice.'
+            font_size: 12
+            text_size: self.width - 20, None
+            size_hint_y: None
+            height: 60
+        GridLayout:
+            cols: 2
+            spacing: 10
+            size_hint_y: 0.6
+            Button:
+                text: 'Daily Check-In'
+                font_size: 16
+                on_press: root.manager.current = 'checkin'
+            Button:
+                text: 'View Reports'
+                font_size: 16
+                on_press: root.manager.current = 'weekly'
+            Button:
+                text: 'Self-Care Tools'
+                font_size: 16
+                on_press: root.manager.current = 'selfcare'
+            Button:
+                text: 'Emergency Help'
+                font_size: 16
+                on_press: root.manager.current = 'emergency'
+            Button:
+                text: 'Support Circle'
+                font_size: 16
+                on_press: root.manager.current = 'support'
+            Button:
+                text: 'History'
+                font_size: 16
+                on_press: root.manager.current = 'history'
+            Button:
+                text: 'Profile'
+                font_size: 16
+                on_press: root.manager.current = 'profile'
+            Button:
+                text: 'Logout'
+                font_size: 16
+                on_press: root.manager.current = 'login'
+
+<SplashScreen>:
+    canvas.before:
+        Color:
+            rgba: 0.88, 0.95, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 40
+        spacing: 20
+        Image:
+            source: 'wellnest_logo.jpeg'
+            allow_stretch: True
+            keep_ratio: True
+            size_hint_y: 0.55
+        Label:
+            text: 'WellNest'
+            font_size: 34
+            bold: True
+            halign: 'center'
+            valign: 'middle'
+            size_hint_y: None
+            height: 80
+        Label:
+            text: 'Your simple wellness companion'
+            font_size: 18
+            halign: 'center'
+            valign: 'middle'
+            text_size: self.width, None
+            size_hint_y: None
+            height: 60
+        ProgressBar:
+            id: progress_bar
+            max: 100
+            value: 0
+            size_hint_y: None
+            height: 20
+            bar_color: 0.27, 0.58, 0.97, 1
+        Label:
+            id: loading_label
+            text: 'Loading'
+            font_size: 16
+            halign: 'center'
+            valign: 'middle'
+            text_size: self.width, None
+            size_hint_y: None
+            height: 40
+
+<CheckInScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 10
+        padding: 20
+        Label:
+            text: 'Daily Check-In'
+            font_size: 20
+            size_hint_y: None
+            height: 40
+        Label:
+            text: 'How is your mood?'
+            size_hint_y: None
+            height: 30
+        Spinner:
+            id: mood_spinner
+            text: '😐 Okay'
+            values: ('😢 Very Bad', '😕 Bad', '😐 Okay', '🙂 Good', '😊 Great')
+            size_hint_y: None
+            height: 40
+        Label:
+            text: 'Stress Level:'
+            size_hint_y: None
+            height: 30
+        Spinner:
+            id: stress_spinner
+            text: 'Medium'
+            values: ('Low', 'Medium', 'High')
+            size_hint_y: None
+            height: 40
+        Label:
+            text: 'Sleep Quality:'
+            size_hint_y: None
+            height: 30
+        Spinner:
+            id: sleep_spinner
+            text: 'Average'
+            values: ('Good', 'Average', 'Poor')
+            size_hint_y: None
+            height: 40
+        Label:
+            text: 'Notes (optional):'
+            size_hint_y: None
+            height: 30
+        TextInput:
+            id: notes_input
+            text: ''
+            multiline: True
+            size_hint_y: 0.3
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: 50
+            Button:
+                text: 'Save Entry'
+                on_press: root.submit_checkin()
+            Button:
+                text: 'Back'
+                on_press: root.manager.current = 'home'
+
+<LoginScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 15
+        padding: 20
+        BoxLayout:
+            size_hint_y: None
+            height: 150
+            Image:
+                source: 'wellnest_logo.jpeg'
+                allow_stretch: True
+                keep_ratio: True
+        Label:
+            text: 'Login to WellNest'
+            font_size: 24
+            size_hint_y: None
+            height: 50
+        ScrollView:
+            GridLayout:
+                cols: 1
+                spacing: 8
+                size_hint_y: None
+                height: self.minimum_height
+                padding: 0, 10
+                Label:
+                    text: 'Username:'
+                    size_hint_y: None
+                    height: 30
+                TextInput:
+                    id: username_input
+                    multiline: False
+                    size_hint_y: None
+                    height: 45
+                Label:
+                    text: 'Email:'
+                    size_hint_y: None
+                    height: 30
+                TextInput:
+                    id: email_input
+                    multiline: False
+                    size_hint_y: None
+                    height: 45
+                Label:
+                    text: 'Password:'
+                    size_hint_y: None
+                    height: 30
+                TextInput:
+                    id: password_input
+                    password: True
+                    multiline: False
+                    size_hint_y: None
+                    height: 45
+                Button:
+                    text: 'Login'
+                    on_press: root.login()
+                    size_hint_y: None
+                    height: 50
+                Button:
+                    text: 'Register'
+                    on_press: root.go_register()
+                    size_hint_y: None
+                    height: 50
+                Label:
+                    id: error_label
+                    text: ''
+                    color: 1, 0, 0, 1
+                    size_hint_y: None
+                    height: 40
+
+<RegisterScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 10
+        padding: 20
+        Label:
+            text: 'Register for WellNest'
+            font_size: 24
+        Label:
+            text: 'Username:'
+        TextInput:
+            id: register_username
+            multiline: False
+        Label:
+            text: 'Email:'
+        TextInput:
+            id: register_email
+            multiline: False
+        Label:
+            text: 'Password:'
+        TextInput:
+            id: register_password
+            password: True
+            multiline: False
+        Button:
+            text: 'Create Account'
+            on_press: root.register()
+        Button:
+            text: 'Back to Login'
+            on_press: root.manager.current = 'login'
+        Label:
+            id: register_error
+            text: ''
+            color: 1,0,0,1
+
+<ProfileScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 10
+        padding: 20
+        Label:
+            text: 'Edit Profile'
+            font_size: 24
+        Label:
+            text: 'Name:'
+        TextInput:
+            id: name_input
+            multiline: False
+        Label:
+            text: 'Username:'
+        TextInput:
+            id: username_input
+            multiline: False
+        Label:
+            text: 'Email:'
+        TextInput:
+            id: email_input
+            multiline: False
+        Label:
+            text: 'New Password:'
+        TextInput:
+            id: password_input
+            password: True
+            multiline: False
+        Button:
+            text: 'Save'
+            on_press: root.save_profile()
+        Label:
+            id: error_label
+            text: ''
+            color: 1,0,0,1
+
+<HistoryScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'Mood History'
+            font_size: 20
+        ScrollView:
+            GridLayout:
+                id: history_grid
+                cols: 1
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 10
+                padding: 8, 8
+        Button:
+            text: 'Back'
+            on_press: root.manager.current = 'home'
+
+<SelfCareScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 10
+        Label:
+            text: 'Self-Care Tools'
+            font_size: 24
+            size_hint_y: None
+            height: 50
+        ScrollView:
+            GridLayout:
+                id: selfcare_grid
+                cols: 1
+                size_hint_y: None
+                height: self.minimum_height
+                row_default_height: '50dp'
+                row_force_default: False
+                spacing: 12
+                padding: 8, 8
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: 50
+            Button:
+                text: 'Back'
+                on_press: root.manager.current = 'home'
+
+<EmergencyScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 12
+        Label:
+            text: 'Emergency Support'
+            font_size: 24
+            size_hint_y: None
+            height: 50
+        Label:
+            text: 'If you feel unsafe or overwhelmed, these helplines can connect you with immediate support.'
+            text_size: self.width - 20, None
+            size_hint_y: None
+            height: 100
+        Label:
+            text: 'Choose a number below to get help right away. If you are in immediate danger, call your local emergency services first.'
+            text_size: self.width - 20, None
+            size_hint_y: None
+            height: 80
+        GridLayout:
+            cols: 1
+            spacing: 10
+            size_hint_y: None
+            height: self.minimum_height
+            Button:
+                text: 'Call 988 - Crisis Lifeline'
+                size_hint_y: None
+                height: 50
+                on_press: root.call_helpline('988')
+            Button:
+                text: 'Call 911 - Emergency Services'
+                size_hint_y: None
+                height: 50
+                on_press: root.call_helpline('911')
+            Button:
+                text: 'Call 800-273-8255 - Suicide Prevention'
+                size_hint_y: None
+                height: 50
+                on_press: root.call_helpline('800-273-8255')
+        Label:
+            id: call_status
+            text: ''
+            color: 1, 0.2, 0.2, 1
+            text_size: self.width - 20, None
+            size_hint_y: None
+            height: 60
+        Button:
+            text: 'Back to Home'
+            size_hint_y: None
+            height: 50
+            on_press: root.manager.current = 'home'
+
+<SupportCircleScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 10
+        Label:
+            text: 'Trusted Friends'
+            font_size: 24
+            size_hint_y: None
+            height: 50
+        Label:
+            text: 'Build your support circle by adding trusted friends, viewing the list, and sharing updates when you need encouragement.'
+            text_size: self.width - 20, None
+            size_hint_y: None
+            height: 60
+        GridLayout:
+            cols: 2
+            spacing: 10
+            size_hint_y: None
+            height: 280
+            BoxLayout:
+                orientation: 'vertical'
+                spacing: 8
+                Label:
+                    text: 'Add a Trusted Friend'
+                    font_size: 16
+                    size_hint_y: None
+                    height: 30
+                TextInput:
+                    id: contact_name
+                    hint_text: 'Name'
+                    multiline: False
+                    size_hint_y: None
+                    height: 40
+                TextInput:
+                    id: contact_relation
+                    hint_text: 'Relationship (trusted friend)'
+                    multiline: False
+                    size_hint_y: None
+                    height: 40
+                TextInput:
+                    id: contact_phone
+                    hint_text: 'Phone'
+                    multiline: False
+                    size_hint_y: None
+                    height: 40
+                TextInput:
+                    id: contact_email
+                    hint_text: 'Email (optional)'
+                    multiline: False
+                    size_hint_y: None
+                    height: 40
+                TextInput:
+                    id: contact_notes
+                    hint_text: 'Notes or support preference'
+                    multiline: True
+                    size_hint_y: None
+                    height: 60
+                Label:
+                    id: friend_status
+                    text: ''
+                    color: 0.8, 0.1, 0.1, 1
+                    size_hint_y: None
+                    height: 30
+                BoxLayout:
+                    size_hint_y: None
+                    height: 50
+                    spacing: 8
+                    Button:
+                        text: 'Add Friend'
+                        on_press: root.save_contact()
+                    Button:
+                        text: 'Refresh List'
+                        on_press: root.load_contacts()
+            BoxLayout:
+                orientation: 'vertical'
+                spacing: 8
+                Label:
+                    text: 'Share an Update'
+                    font_size: 16
+                    size_hint_y: None
+                    height: 30
+                TextInput:
+                    id: friend_update_input
+                    hint_text: 'Share how you are feeling or what support you need'
+                    multiline: True
+                    size_hint_y: None
+                    height: 140
+                Button:
+                    text: 'Share Update'
+                    size_hint_y: None
+                    height: 50
+                    on_press: root.share_update()
+                Label:
+                    text: 'Recent shared updates'
+                    font_size: 16
+                    size_hint_y: None
+                    height: 30
+                ScrollView:
+                    GridLayout:
+                        id: message_grid
+                        cols: 1
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: 8
+                        padding: 6, 6
+        Label:
+            text: 'Your trusted friends list'
+            font_size: 18
+            size_hint_y: None
+            height: 40
+        ScrollView:
+            GridLayout:
+                id: circle_grid
+                cols: 1
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 8
+                padding: 6, 6
+        Button:
+            text: 'Back to Home'
+            size_hint_y: None
+            height: 50
+            on_press: root.manager.current = 'home'
+
+<WeeklyReportScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'Weekly Insights'
+            font_size: 20
+        ScrollView:
+            GridLayout:
+                id: weekly_grid
+                cols: 1
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 10
+                padding: 8, 8
+        Button:
+            text: 'Back'
+            on_press: root.manager.current = 'home'
+
